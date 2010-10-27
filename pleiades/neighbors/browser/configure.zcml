@@ -1,0 +1,14 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  i18n_domain="pleiades.neighbors"
+  >
+
+  <browser:page
+    for="Products.PleiadesEntity.content.interfaces.IPlace"
+    name="neighbors"
+    class=".NeighborsView"
+    permission="zope2.View"
+    />
+        
+</configure>

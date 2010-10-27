@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="pleiades.neighbors">
+
+  <head>
+    <metal:head fill-slot="head_slot">
+      <metal:links metal:use-macro="here/place_view/macros/links"></metal:links>
+    </metal:head>
+   
+    <metal:js_head fill-slot="javascript_head_slot">
+      <metal:js metal:use-macro="here/place_view/macros/js"></metal:js>
+    </metal:js_head>
+  </head>
+      
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+        <h1 class="documentFirstHeading">Neighbors of "<span tal:replace="here/Title"/>"</h1>
+
+        <p class="documentDescription">Other places within 20 km</p>
+
+        <div id="map" style="width:100%;height:300px;border:solid #ccc 1px;background-color:#cccccc;"></div>
+      
+      <br/>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <tal:listing>
+            <tal:default define="folderContents view/nearest">
+                <metal:listing metal:use-macro="here/neighbors_tabular_view/macros/listing">
+                    <metal:empty metal:fill-slot="no_items_in_listing"></metal:empty>
+                </metal:listing>
+
+            </tal:default>
+
+        </tal:listing>
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
+
