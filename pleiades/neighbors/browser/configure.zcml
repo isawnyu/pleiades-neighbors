@@ -9,6 +9,7 @@
     name="neighbors"
     class=".NeighborsView"
     permission="zope2.View"
+    allowed_attributes="distance"
     />
         
 </configure>
