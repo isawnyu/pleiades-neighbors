@@ -13,6 +13,30 @@
    
     <metal:js_head fill-slot="javascript_head_slot">
       <metal:js metal:use-macro="here/place_view/macros/js"></metal:js>
+      <script type="text/javascript">
+      function openinfowindow(obj) {
+        var tr = obj.parentNode.parentNode.parentNode;
+        var title_a = jq("td a", tr)[0]; //.text;
+        var cp = jq("#center-point", tr).text().split(",");
+        var pos = new google.maps.LatLng(parseFloat(cp[1]), parseFloat(cp[0]));
+        infowindow.close();
+        var msg = document.createElement("div");
+        var head = document.createElement("h4");
+        var ident = document.createElement("p");
+        var descr = document.createElement("p");
+        var ua = document.createElement("a");
+        jq(ua).attr("href", jq(title_a).attr("href"));
+        jq(ua).text(jq(title_a).attr("href"));
+        jq(ident).append(ua);
+        jq(descr).text(jq(title_a).attr("title"));
+        jq(head).text(jq(title_a).text());
+        jq(msg).append(head);
+        jq(msg).append(ident);
+        jq(msg).append(descr);
+        infowindow.setOptions({position: pos, content: msg});
+        infowindow.open(map);
+      }
+      </script>
     </metal:js_head>
   </head>
       

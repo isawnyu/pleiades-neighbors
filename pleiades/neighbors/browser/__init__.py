@@ -34,6 +34,15 @@ class NeighborsView(BrowserView):
                 self.context, b.getPath()))
             raise
 
+    def center(self, b):
+        try:
+            centroid = asShape(b.zgeo_geometry).centroid
+            return "%f,%f" % (centroid.x, centroid.y)
+        except:
+            log.warn("Failed to find center of %s" % (
+                b.getPath()))
+            raise
+
     def nearest(self):
         catalog = getToolByName(self.context, 'portal_catalog')
         class NeighborBrain(AbstractCatalogBrain, NoBrainer):
@@ -44,6 +53,7 @@ class NeighborsView(BrowserView):
         scopy['data_record_score_']=len(cschema.keys())+1
         scopy['data_record_normalized_score_']=len(cschema.keys())+2
         scopy['distance']=len(cschema.keys())+3
+        scopy['center']=len(cschema.keys())+4
         NeighborBrain.__record_schema__ = scopy
         try:
             g = IGeoreferenced(self.context)
@@ -62,6 +72,7 @@ class NeighborsView(BrowserView):
                 for k in brain.__record_schema__.keys():
                     neighbor[k] = brain[k]
                 neighbor['distance'] = self.distance(brain)
+                neighbor['center'] = self.center(brain)
                 yield neighbor
         b_size = 20
         b_start = self.request.get('b_start', 0)
