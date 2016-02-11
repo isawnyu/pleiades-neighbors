@@ -1,6 +1,6 @@
 from collective.geo.geographer.interfaces import IGeoreferenced
+from plone.batching import Batch
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import Batch
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.ZCatalog.CatalogBrains import AbstractCatalogBrain, NoBrainer
