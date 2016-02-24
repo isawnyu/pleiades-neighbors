@@ -12,7 +12,10 @@
     <metal:main-macro define-macro="main"
                       tal:define="kssClassesView context/@@kss_field_decorator_view;
                                   getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                                  templateId template/getId">
+                                  templateId template/getId;
+                                  normalizeString nocall:context/@@plone/normalizeString;
+                                  toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                                  isAnon context/@@plone_portal_state/anonymous;">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
