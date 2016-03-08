@@ -7,10 +7,6 @@
       i18n:domain="pleiades.neighbors">
 
   <head>
-    <metal:head fill-slot="head_slot">
-      <metal:links metal:use-macro="here/place_view/macros/links"></metal:links>
-    </metal:head>
-   
     <metal:js_head fill-slot="javascript_head_slot">
       <metal:js metal:use-macro="here/place_view/macros/js"></metal:js>
       <script type="text/javascript">
